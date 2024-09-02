@@ -25,14 +25,17 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Message
 import androidx.compose.material.icons.rounded.Phone
+import androidx.compose.material.icons.rounded.SelfImprovement
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.AppCard
 import androidx.wear.compose.material.Button
+import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Text
@@ -105,6 +108,23 @@ fun ChipExample(
     modifier: Modifier = Modifier,
     iconModifier: Modifier = Modifier,
 ) {
+    Chip(modifier = modifier,
+        onClick = { /*TODO*/ },
+        label = {
+            Text(
+                text = "5 minute meditation",
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+        },
+        icon = {
+            Icon(
+                imageVector = Icons.Rounded.SelfImprovement,
+                contentDescription = "triggers meditation action",
+                modifier = iconModifier
+            )
+        }
+    )
 }
 
 // TODO: Create a ToggleChip Composable
