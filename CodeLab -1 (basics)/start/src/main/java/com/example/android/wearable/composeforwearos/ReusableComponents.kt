@@ -48,9 +48,6 @@ import androidx.wear.compose.material.ToggleChip
 import androidx.wear.compose.ui.tooling.preview.WearPreviewDevices
 import com.example.android.wearable.composeforwearos.theme.WearAppTheme
 
-/* Contains individual Wear OS demo composables for the code lab. */
-
-// TODO: Create a Button Composable (with a Row to center)
 @Composable
 fun ButtonExample(
     modifier: Modifier = Modifier,
@@ -74,7 +71,6 @@ fun ButtonExample(
     )
 }
 
-// TODO: Create a Text Composable
 @Composable
 fun TextExample(modifier: Modifier = Modifier) {
     Text(
@@ -85,7 +81,6 @@ fun TextExample(modifier: Modifier = Modifier) {
     )
 }
 
-// TODO: Create a Card (specifically, an AppCard) Composable
 @Composable
 fun CardExample(
     modifier: Modifier = Modifier,
@@ -108,7 +103,6 @@ fun CardExample(
     )
 }
 
-// TODO: Create a Chip Composable
 @Composable
 fun ChipExample(
     modifier: Modifier = Modifier,
@@ -133,7 +127,6 @@ fun ChipExample(
     )
 }
 
-// TODO: Create a ToggleChip Composable
 @Composable
 fun ToggleChipExample(modifier: Modifier = Modifier) {
     var checked = remember { mutableStateOf(true) }
