@@ -27,9 +27,13 @@ import androidx.compose.material.icons.automirrored.rounded.Message
 import androidx.compose.material.icons.rounded.Phone
 import androidx.compose.material.icons.rounded.SelfImprovement
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -38,7 +42,9 @@ import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Chip
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.MaterialTheme
+import androidx.wear.compose.material.Switch
 import androidx.wear.compose.material.Text
+import androidx.wear.compose.material.ToggleChip
 import androidx.wear.compose.ui.tooling.preview.WearPreviewDevices
 import com.example.android.wearable.composeforwearos.theme.WearAppTheme
 
@@ -130,6 +136,27 @@ fun ChipExample(
 // TODO: Create a ToggleChip Composable
 @Composable
 fun ToggleChipExample(modifier: Modifier = Modifier) {
+    var checked = remember { mutableStateOf(true) }
+    ToggleChip(
+        modifier = modifier,
+        checked = checked.value,
+        toggleControl = {
+            Switch(
+                checked = checked.value,
+                modifier = Modifier.semantics {
+                    this.contentDescription = if (checked.value) "On" else "Off"
+                }
+            )
+        },
+        onCheckedChange = { checked.value = it },
+        label = {
+            Text(
+                text = "Sound",
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
+    )
 }
 
 // Function only used as a demo for when you start the code lab (removed as step 1).
