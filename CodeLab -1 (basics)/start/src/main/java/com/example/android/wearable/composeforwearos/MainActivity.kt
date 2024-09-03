@@ -15,8 +15,10 @@ import androidx.compose.ui.unit.dp
 import androidx.wear.compose.ui.tooling.preview.WearPreviewDevices
 import com.example.android.wearable.composeforwearos.theme.WearAppTheme
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
+import com.google.android.horologist.compose.layout.AppScaffold
 import com.google.android.horologist.compose.layout.ScalingLazyColumn
 import com.google.android.horologist.compose.layout.ScalingLazyColumnDefaults
+import com.google.android.horologist.compose.layout.ScreenScaffold
 import com.google.android.horologist.compose.layout.rememberResponsiveColumnState
 
 class MainActivity : ComponentActivity() {
@@ -33,48 +35,39 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun WearApp() {
     WearAppTheme {
-        /* *************************** Part 4: Wear OS Scaffold *************************** */
-        // TODO (Start): Create a AppScaffold (Wear Version)
+        AppScaffold(
+            content = {
+                val listState = rememberResponsiveColumnState(
+                    contentPadding = ScalingLazyColumnDefaults.padding(
+                        first = ScalingLazyColumnDefaults.ItemType.SingleButton,
+                        last = ScalingLazyColumnDefaults.ItemType.Chip
+                    )
+                )
+                ScreenScaffold(
+                    scrollState = listState,
+                    content = {
+                        val contentModifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 8.dp)
+                        val iconModifier = Modifier
+                            .size(24.dp)
+                            .wrapContentSize(align = Alignment.Center)
+                        ScalingLazyColumn(
+                            modifier = Modifier.fillMaxSize(),
+                            columnState = listState,
+                        ) {
+                            item { ButtonExample(contentModifier, iconModifier) }
+                            item { TextExample(contentModifier) }
+                            item { CardExample(contentModifier, iconModifier) }
 
-        // TODO: Swap to ScalingLazyColumnState
-        val listState = rememberResponsiveColumnState(
-            contentPadding = ScalingLazyColumnDefaults.padding(
-                first = ScalingLazyColumnDefaults.ItemType.SingleButton,
-                last = ScalingLazyColumnDefaults.ItemType.Chip
-            )
+                            item { ChipExample(contentModifier, iconModifier) }
+                            item { ToggleChipExample(contentModifier) }
+                        }
+                    }
+                )
+            }
         )
-
-        /* *************************** Part 4: Wear OS Scaffold *************************** */
-        // TODO (Start): Create a ScreenScaffold (Wear Version)
-
-        // Modifiers used by our Wear composables.
-        val contentModifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = 8.dp)
-        val iconModifier = Modifier
-            .size(24.dp)
-            .wrapContentSize(align = Alignment.Center)
-
-        /* *************************** Part 3: ScalingLazyColumn *************************** */
-        // TODO: Swap a ScalingLazyColumn (Wear's version of LazyColumn)
-
-        ScalingLazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            columnState = listState,
-        ) {
-            /* ******************* Part 1: Simple composables ******************* */
-            item { ButtonExample(contentModifier, iconModifier) }
-            item { TextExample(contentModifier) }
-            item { CardExample(contentModifier, iconModifier) }
-
-            /* ********************* Part 2: Wear unique composables ********************* */
-            item { ChipExample(contentModifier, iconModifier) }
-            item { ToggleChipExample(contentModifier) }
-        }
-
-        // TODO (End): Create a ScreenScaffold (Wear Version)
     }
-    // TODO (End): Create a AppScaffold (Wear Version)
 }
 
 @WearPreviewDevices
